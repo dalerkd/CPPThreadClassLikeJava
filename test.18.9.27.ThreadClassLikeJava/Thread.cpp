@@ -14,10 +14,10 @@ Thread::~Thread()
 unsigned long Thread::start()throw(std::exception)
 {
 	DWORD ThreadID=0;
-	HANDLE threadHandle = CreateThread(0,-1, nullptr,(void*)this,0,&ThreadID);
+	HANDLE threadHandle = CreateThread(0,0, StaticThreadStart,(void*)this,0,&ThreadID);
 	m_threadHandle = threadHandle;
 	m_threadID = ThreadID;
-
+	
 	if (threadHandle == 0)
 	{
 		throw std::exception("CreateThreadFault");
